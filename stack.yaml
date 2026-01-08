@@ -20,7 +20,7 @@
 #resolver:
 #  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/22/21.yaml
 
-resolver: lts-21.25
+resolver: lts-23.28 # ghc-9.8.4
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
