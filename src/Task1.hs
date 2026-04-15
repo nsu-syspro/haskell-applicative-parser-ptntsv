@@ -1,9 +1,11 @@
 {-# OPTIONS_GHC -Wall #-}
+
 -- The above pragma enables all warnings
 
 module Task1 where
 
 import Parser
+import ParserCombinators (char, choice, digit, some)
 
 -- | Parses natural number (including zero)
 --
@@ -19,9 +21,12 @@ import Parser
 -- Failed [PosError 0 (Unexpected 'a')]
 -- >>> parse nat "123abc"
 -- Parsed 123 (Input 3 "abc")
---
 nat :: Parser Integer
-nat = error "TODO: define nat"
+nat = read <$> some digit
+
+-- >>> parse neg "-1"
+neg :: Parser Integer
+neg = read <$> ((:) <$> (char '-') <*> some digit)
 
 -- | Parses integer number
 --
@@ -37,6 +42,5 @@ nat = error "TODO: define nat"
 -- Failed [PosError 0 (Unexpected 'a')]
 -- >>> parse int "123abc"
 -- Parsed 123 (Input 3 "abc")
---
 int :: Parser Integer
-int = error "TODO: define int"
+int = choice [nat, neg]
